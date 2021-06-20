@@ -1,14 +1,15 @@
 (ns living-clojure.core)
+(ns clojure.set)
 
 42
-(/ 2 3)
-(/ 2 3.0)
+(/ 2 3) ; ratio 2/3
+(/ 2 3.0) ; division by decimal
 "jam"
-:jam
-\j 
+:jam ; keyword
+\j ; letter
 true
-nil
-(+ 1 1)
+nil ; represent absence of a value
+(+ 1 1) ; operation - adding two numbers 1+1
 (+ 1 (+ 8 3))
 1
 
@@ -46,6 +47,42 @@ nil
        {:car6 'Saab'})
 
 ; Sets - Unique collection of data
+#{:red :blue :white :pink}
+(clojure.set/union #{:fiat :volvo :ford} #{:toyota :ford :audi}) ; Union
+(clojure.set/difference #{:fiat :volvo :ford} #{:toyota :ford :audi}) ; Difference - Removes from first set the matching values
+(clojure.set/intersection #{:fiat :volvo :ford} #{:toyota :ford :audi}) ; Intersection - Matching values between sets
+(set [1 2 3]) ; Convert vector to set
+(get #{:door :wall :floor :ceiling} :wall) 
+(:wall #{:door :wall :floor :ceiling}) ; get
+(#{:door :wall :floor :ceiling} :wall) ; get
+(contains? #{:red :blue :white :pink} :blue)
+(conj #{:red :blue :white :pink} :black) ; add
+(disj #{:red :blue :white :pink} :pink) ; remove
+
+; Clojure is all about lists -> Clojure code is made of lists of data -> Code is data!
+
+; ##############################
+; Symbols and the art of binding
+; ##############################
+
+; def allows you to give something a name
+(def planet "Mars")
+planet
+living-clojure.core/planet
+
+(let [planet "Venus"] ; let - binds symbols that are only available within the context of let
+  planet)
+(let [planet "Jupiter" moon "Io" ] 
+  [planet moon])
+; NOTE: What happens in a let, stays in a let.
+
+; def - global  vars
+; let - temporary bindings
+
+
+
+
+
 
 
 
