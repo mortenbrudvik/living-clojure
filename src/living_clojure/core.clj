@@ -80,6 +80,49 @@ living-clojure.core/planet
 ; let - temporary bindings
 
 
+; ##########################
+; Creating our own functions
+; ##########################
+
+(defn take-the-red-pill [] "Clojure here we go!")
+(take-the-red-pill)
+
+(defn get-full-name [first-name last-name] 
+  {:data-type "Full name"
+   :first-name first-name
+   :last-name last-name})
+(get-full-name "Morten" "Brudvik")
+
+(fn [] (str "lets do it" "!")) ; Anonymious functions
+((fn [] (str "lets do it" "!"))) ; Extra paranteces to invoke
+
+
+(def lets-do-it (fn [] (str "lets do it" "!"))) ; defn is the same as def
+(lets-do-it)
+
+(#(str "lets do it" "!")) ; # short hand form
+(#(str "lets do it" "!" " - " %) "again") ; % to represent a value
+(#(str "lets do it" "!" " - " %1 %2) "again" "?") ; multiple values
+
+
+; #########################################
+; Keep your symbols organized in Namespaces
+; #########################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
