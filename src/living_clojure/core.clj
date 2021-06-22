@@ -1,5 +1,5 @@
 (ns living-clojure.core)
-(ns clojure.set)
+(require 'clojure.set)
 
 42
 (/ 2 3) ; ratio 2/3
@@ -52,7 +52,7 @@ nil ; represent absence of a value
 (clojure.set/difference #{:fiat :volvo :ford} #{:toyota :ford :audi}) ; Difference - Removes from first set the matching values
 (clojure.set/intersection #{:fiat :volvo :ford} #{:toyota :ford :audi}) ; Intersection - Matching values between sets
 (set [1 2 3]) ; Convert vector to set
-(get #{:door :wall :floor :ceiling} :wall) 
+(get #{:door :wall :floor :ceiling} :wall)
 (:wall #{:door :wall :floor :ceiling}) ; get
 (#{:door :wall :floor :ceiling} :wall) ; get
 (contains? #{:red :blue :white :pink} :blue)
@@ -72,7 +72,7 @@ living-clojure.core/planet
 
 (let [planet "Venus"] ; let - binds symbols that are only available within the context of let
   planet)
-(let [planet "Jupiter" moon "Io" ] 
+(let [planet "Jupiter" moon "Io"]
   [planet moon])
 ; NOTE: What happens in a let, stays in a let.
 
@@ -87,20 +87,20 @@ living-clojure.core/planet
 (defn take-the-red-pill [] "Clojure here we go!")
 (take-the-red-pill)
 
-(defn get-full-name [first-name last-name] 
+(defn get-full-name [first-name last-name]
   {:data-type "Full name"
    :first-name first-name
    :last-name last-name})
 (get-full-name "Morten" "Brudvik")
 
-(fn [] (str "lets do it" "!")) ; Anonymious functions
-((fn [] (str "lets do it" "!"))) ; Extra paranteces to invoke
+(fn [] (str "lets do it" "!")) ; anonymous functions
+((fn [] (str "lets do it" "!"))) ; extra paranteces to invoke
 
 
 (def lets-do-it (fn [] (str "lets do it" "!"))) ; defn is the same as def
 (lets-do-it)
 
-(#(str "lets do it" "!")) ; # short hand form
+(#(str "lets do it" "!")) ; # short hand form of anonymous functions
 (#(str "lets do it" "!" " - " %) "again") ; % to represent a value
 (#(str "lets do it" "!" " - " %1 %2) "again" "?") ; multiple values
 
@@ -109,6 +109,37 @@ living-clojure.core/planet
 ; Keep your symbols organized in Namespaces
 ; #########################################
 
+(ns brudvik.morten) ; specify the namespace
+(require '[brudvik.morten :as mb]) ; load a given namespace and set an alias for it
+mb/planet-name
+*ns* ;  show current namespace
+
+(def planet-name "Jupiter")
+planet-name
+brudvik.morten/planet-name
+
+(ns brudvik.morten ; Typical setup of namespace and require to load other namespaces
+  "My app example"
+  (:require
+   [clojure.set :as set]
+   [clojure.string :as str]))
+
+; More about namespaces: https://clojure.org/guides/learn/namespaces
+
+
+
+; ###############################################
+; Chapter 2 - Flow and Functional Transformations
+; ###############################################
+
+; Expression is code that can be evaluated for a result.
+(first [1 2 3 4])
+; Form is a valid expression that can be evaluated.
+(first [:a :b :c])
+
+; #########################
+; Controlling flow an logic
+; #########################
 
 
 
@@ -129,4 +160,9 @@ living-clojure.core/planet
 
 
 
- 
+
+
+
+
+
+
