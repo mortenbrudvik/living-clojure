@@ -1,6 +1,10 @@
 (ns living-clojure.core)
 (require 'clojure.set)
 
+; ####################################
+; Chapter 1 - The Structure of Clojure
+; ####################################
+
 42
 (/ 2 3) ; ratio 2/3
 (/ 2 3.0) ; division by decimal
@@ -140,6 +144,77 @@ brudvik.morten/planet-name
 ; #########################
 ; Controlling flow an logic
 ; #########################
+
+(true? true)
+(true? false)
+
+(nil? nil) ; true
+(nil? 1) ; false 
+
+(not true) ; false
+(not nil) ; true
+(not "hi") ; false
+
+(= :planet :planet)
+(= :planet 1)
+(= '(:planet "fish")  [:planet "fish"]) ; true
+(not=  :planet 4) ; true - shortcut for  (not (= :planet 4))
+
+; ##########################
+; Logic Tests on Collections
+; ##########################
+
+; Test if a collection is empty
+(empty? [:planet])
+(empty? [])
+(empty? '())
+
+; IPersistentCollection - Shared interface between all collections (count, conj and seq)
+; seq - turns a collection into a sequence
+; sequence is a walkable list structure (first, rest and cons)
+(seq [1 2 3])  ; is treated in tests as logically true
+(seq []) ; nil - logically false, same as (not (empty? []))
+
+(class [1 2 3])
+(class (seq [1 2 3]))
+
+(every? odd? [1 3 5]) ; check every collection item
+(every? odd? [1 2 3 4 5])
+
+; NOTE: it'd idiomatic in Clojure to use question mark if it returns a boolean
+(defn planet? [x]
+  (= x :planet))
+(planet? :planet)
+(planet? :moon)
+(every? planet? [:planet :planet])
+(every? planet? [:planet :moon])
+(every? (fn [x] (= x :planet)) [:planet :planet]) ; anonymous function
+(every? (fn [x] (= x :planet)) [:planet :moon])
+(every? #(= % :planet) [:planet :planet]) ; shorthand 
+(not-any? #(= % :moon) [:planet]) ; true if does not contain
+
+; some pred col - returns the first logical true value of predicate, nil otherwise.
+(some #(> % 3) [1 2 3 4 5]) ; true if there is numbers greater than 3
+(#{1 2 3 4 5} 3) ; set is a functions of its members. non-nil is considered logical true
+(some #{3} [1 2 3 4 5]) ; first matching element
+(some #{nil} [nil nil]) ; be careful with logical false values
+(some #{false} [false false])
+
+; ####################################
+; Harnessing the Power of Flow Control
+; ####################################
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
