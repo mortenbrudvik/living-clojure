@@ -204,6 +204,24 @@ brudvik.morten/planet-name
 ; Harnessing the Power of Flow Control
 ; ####################################
 
+(if true "it is true" "it is false")
+(if false "it is true" "it is false")
+(if nil "it is true" "it is false") ; false
+(if (= :planet :planet)
+  "it is a planet"
+  "it is not a planet")
+
+(let [is-bigger-than-earth (> 1.1 1)]
+  (if is-bigger-than-earth
+    "Bigger"
+    "Smaller"))
+(if-let [is-bigger-than-earth (> 1.1 1)] ; if-let combines let and if
+  "Bigger"
+  "Smaller")
+
+
+
+
 
 
 
