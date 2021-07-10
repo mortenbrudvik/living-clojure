@@ -211,13 +211,49 @@ brudvik.morten/planet-name
   "it is a planet"
   "it is not a planet")
 
-(let [is-bigger-than-earth (> 1.1 1)]
-  (if is-bigger-than-earth
-    "Bigger"
+(let [is-larger-than-earth (> 1.1 1)]
+  (if is-larger-than-earth
+    "Larger"
     "Smaller"))
-(if-let [is-bigger-than-earth (> 1.1 1)] ; if-let combines let and if
-  "Bigger"
+(if-let [is-larger-than-earth (> 1.1 1)] ; if-let combines let and if
+  "Larger"
   "Smaller")
+
+(defn is-large-planet [is-larger-than-earth]
+  (when is-larger-than-earth "Larger")) ; when will ignore false
+
+(is-large-planet (> 1.1 1.0))
+
+(when-let [is-larger-than-earth true] ; combine let and when
+  "larger")
+
+(let [planet "Earth"] ; NB! will return nil if there is no match
+  (cond ; Similar to if else.
+    (= planet "Earth") "Home Sweet Home"
+    (= planet "Mars") "The Rusty Planet"
+    (= planet "Jupiter") "King of the Solar System"
+    :else "Unknown")) ; default clause. Note: There is nothing special about :else, we could have used :default
+
+(let [planet "Mars"] ; NB! will return an error if no match
+  (case planet ; Shorthand for cond
+    "Earth" "Home Sweet Home"
+    "Mars" "The Rusty Planet"
+    "Jupiter" "King of the Solar System"
+    "Unknown")) ; default
+
+; #######################################################
+; Functions Creating Functions and Other Neat Expressions
+; #######################################################
+
+
+
+
+
+
+
+
+
+
 
 
 
