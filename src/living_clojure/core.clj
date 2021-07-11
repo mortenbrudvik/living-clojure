@@ -245,6 +245,48 @@ brudvik.morten/planet-name
 ; Functions Creating Functions and Other Neat Expressions
 ; #######################################################
 
+(defn turn [car-brand direction]
+  (if (= direction :left)
+    (str car-brand " is turning left")
+    (str car-brand " is turning right")))
+
+(turn "Volvo" :left)
+
+(partial turn "Volvo") ; partial - creating a new function with some of the parameters partially applied
+((partial turn "Volco") :left)
+
+(defn multiply-with-2 [number]
+  (* number 2))
+(defn multiply-with-3 [number]
+  (* number 3))
+(multiply-with-2 2)
+(multiply-with-3 2)
+
+(defn multiply-with-6 [number] ; Method composition
+  (multiply-with-3 
+   (multiply-with-2 number)))
+(multiply-with-6 5)
+
+(defn multiply-with-12 [number]
+  ((comp multiply-with-6 multiply-with-2) number)) ; comp - more elegant
+(multiply-with-12 10)
+
+(defn adder [x y]
+  (+ x y))
+(adder 1 2)
+
+(def adder-5 (partial adder 5))
+(adder-5 10)
+
+
+; #############
+; Destructering
+; #############
+
+
+
+
+
 
 
 
