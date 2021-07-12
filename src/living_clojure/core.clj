@@ -263,7 +263,7 @@ brudvik.morten/planet-name
 (multiply-with-3 2)
 
 (defn multiply-with-6 [number] ; Method composition
-  (multiply-with-3 
+  (multiply-with-3
    (multiply-with-2 number)))
 (multiply-with-6 5)
 
@@ -282,6 +282,52 @@ brudvik.morten/planet-name
 ; #############
 ; Destructering
 ; #############
+
+(let [[planet size] ["Earth" 1]] ; destructering - the vector sybols is bound the values
+  (str planet " is " size " Earth sizes"))
+
+(let [x ["Earth" 1]
+      planet (first x) ; same as above without destructering.
+      size (last x)]
+  (str planet " is " size " Earth masses"))
+
+(let [[planet [size]] ["Earth" [1]]]
+  (str planet " is " size " Earth masses"))
+
+(let [[planet [size] :as original] ["Earth" [1]]] ; :as to keep the original data structure
+  {:planet planet :size size :original original})
+
+(let [{planet1 :planet1 planet2 :planet2} ; destructering maps
+      {:planet1 "Earth" :planet2 "Mars"}]
+  (str planet1 " and " planet2))
+
+(let [{planet1 :planet1 planet2 :planet2 :or {planet2 "Jupiter"}} ; default value if value is not in the map
+      {:planet1 "Earth"}]
+  (str planet1 " and " planet2))
+
+(let [{planet1 :planet1 :as all-planets} ; keep the original as data structure
+      {:planet1 "Earth"}]
+  [planet1 all-planets])
+
+(let [{:keys [planet1 planet2]} ; :keys - same name of the binding as the key
+  {:planet1 "Earth" :planet2 "Mars"}]
+ (str planet1 " and " planet2))
+
+(defn planet-names [planets] ; Destructering parameters to a function
+  (str "The planets are "
+       (:planet1 planets)
+       " and "
+       (:planet2 planets)))
+(planet-names {:planet1 "Earth" :planet2 "Mars"})
+
+(defn planet-names [{:keys [planet1 planet2]}] ; even clearer
+  (str planet1 " and " planet2))
+(planet-names {:planet1 "Earth" :planet2 "Mars"})
+
+
+; #####################
+; The Power of Laziness
+; #####################
 
 
 
