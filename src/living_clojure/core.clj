@@ -329,10 +329,30 @@ brudvik.morten/planet-name
 ; The Power of Laziness
 ; #####################
 
+(take 5 (range)) ; range - first five numbers - Lazy sequence
+
+(count (take 1000 (range)))
+
+(repeat 3 "Earth") ;  ; repeat 3 times
+
+(take 5 (repeat "Earth")) 
+
+(rand-int 10) ; random 0-10
+
+(repeat 5 (rand-int 10)) ; 
+
+#(rand-int 10)
+
+(take 10 (repeatedly #(rand-int 10))) ; repeatedly - same a repeat but takes a method
+
+(take 6 (cycle ["Earth" "Mars"])) ; Cycle between two values
+
+(take 3 (rest (cycle ["Earth" "Mars"]))) ; rest - returns a seq
 
 
-
-
+; #########
+; Recursion
+; #########
 
 
 
