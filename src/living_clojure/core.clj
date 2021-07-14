@@ -283,7 +283,7 @@ brudvik.morten/planet-name
 ; Destructering
 ; #############
 
-(let [[planet size] ["Earth" 1]] ; destructering - the vector sybols is bound the values
+(let [[planet size] ["Earth" 1]] ; destructering - the vector symbols is bound the values
   (str planet " is " size " Earth sizes"))
 
 (let [x ["Earth" 1]
@@ -347,12 +347,52 @@ brudvik.morten/planet-name
 
 (take 6 (cycle ["Earth" "Mars"])) ; Cycle between two values
 
-(take 3 (rest (cycle ["Earth" "Mars"]))) ; rest - returns a seq
+(take 3 (rest (cycle ["Earth" "Mars"]))) ; rest 
 
 
 ; #########
 ; Recursion
 ; #########
+
+(def planets ["Earth", "Mars", "Jupiter", "Uranus"])
+
+(defn planet-is [in out] ; Recursive
+  (if (empty? in)
+    out
+    (planet-is
+     (rest in)
+     (conj out 
+           (str "Planet is " (first in))))))
+(planet-is planets [])
+
+(defn planet-is [input]
+  (loop [in input ; using a loop instead
+        out []]
+    (if (empty? in)
+      out
+      (recur (rest in)
+             (conj out 
+                   (str "Planet is " (first in)))))))
+(planet-is planets)
+
+(defn countdown [n]
+  (if (= n 0)
+    n
+    (countdown (- n 1))))
+(countdown 1000000) ; will result in stackoverflow
+
+(defn countdown [n]
+  (if (= n 0 )
+    n
+    (recur (- n 1)))) ; recur will not add to stack
+(countdown 1000000) ; this will work fine
+
+; ############################################
+; The Functional Shape of Data Transformations
+; ############################################
+
+
+
 
 
 
