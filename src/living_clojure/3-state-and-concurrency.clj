@@ -4,10 +4,9 @@
 ; Chapter 3 - State and Concurrency
 ; #################################
 
-; * Refs are for Coordinated Synchronous access to "Many Identities" .
-; * Atoms are for Uncoordinated synchronous access to a single Identity.
-; * Agents are for Uncoordinated asynchronous access to a single Identity.
-; * Vars are for thread local isolated identities with a shared default value.
+; * Refs   - synchronous  | coordinated
+; * Atoms  - synchronous  | uncoordinated
+; * Agents - asynchronous | uncoordinated
 ; https://stackoverflow.com/questions/9132346/clojure-differences-between-ref-var-agent-atom-with-examples
 
 ; Using Atoms for Independent Items
@@ -105,3 +104,30 @@ who-atom
 
 
 ; Using Agents to Manage Changes on Their Own
+(def who-agent (agent :moon))
+@who-agent
+(defn change [state]
+  (case state 
+    :moon :planet
+    :planet :gas-giant
+    :gas-giant :star
+    :star :black-hole
+    :black-hole :white-hole))
+(send who-agent change) ; send - change state (CPU bond operations)
+(send-off who-agent change) ; send-off -  (IO bond operations)
+
+(defn change-error [state]
+  (throw (Exception. "Boom!"))) ; 
+(send who-agent change-error) ; Will return failed state, but last state will be kept
+(send-off who-agent change) ; will see catched error thrown
+(agent-errors who-agent) ; inspect errors
+(restart-agent who-agent :moon) ; restart agent
+(send who-agent change)
+
+(set-error-mode! who-agent :continue) ; Control how agent respond to error :continue|:fail
+(defn err-handler-fn [a ex]
+  (println "error " ex " value is " @a))
+(set-error-handler! who-agent err-handler-fn) ; set error handler for agent
+(send who-agent change-error)
+
+
