@@ -5,4 +5,5 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [camel-snake-kebab "0.4.2"]]
-  :repl-options {:init-ns living-clojure.core})
+  :repl-options {:init-ns living-clojure.5-how-to-use-Clojure-project-and-libraries}
+  :main living-clojure.5-how-to-use-Clojure-project-and-libraries)
