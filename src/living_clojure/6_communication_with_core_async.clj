@@ -37,4 +37,31 @@
 (async/>!! earth-channel :earth)
 (async/>!! mars-channel :mars)
 
+; Random selection of a channel
+(def spacex-planet-service-chan (async/chan 10))
+(def blue-origin-planet-service-chan (async/chan 10))
+(defn random-add []
+  (reduce + (conj [] (repeat 1 (rand-int 10000)))))
+(defn request-spacex-planet-service []
+  (async/go
+   (random-add)
+   (async/>! spacex-planet-service-chan
+             "Space-X wins the NASA contract")))
+(defn request-blue-moon-planet-service []
+  (async/go
+    (random-add)
+    (async/>! blue-origin-planet-service-chan
+              "Blue Mooon wins the NASA contract")))
+(defn request-nasa-contract []
+  (request-spacex-planet-service)
+  (request-blue-moon-planet-service)
+  (async/go (let [[v] (async/alts!
+                       [spacex-planet-service-chan
+                        blue-origin-planet-service-chan])]
+              (println v))))
+(request-nasa-contract)
+
+
+
+
 

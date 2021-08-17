@@ -7,4 +7,5 @@
                  [camel-snake-kebab "0.4.2"]
                  [org.clojure/core.async "1.3.618"]]
   :repl-options {:init-ns living-clojure.5-how-to-use-Clojure-project-and-libraries}
-  :main living-clojure.5-how-to-use-Clojure-project-and-libraries)
+  :main living-clojure.5-how-to-use-Clojure-project-and-libraries
+  :aot [living-clojure.5-how-to-use-Clojure-project-and-libraries])
